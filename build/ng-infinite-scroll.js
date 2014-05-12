@@ -1,4 +1,4 @@
-/* ng-infinite-scroll - v1.1.0 - 2014-04-03 */
+/* ng-infinite-scroll - v1.1.0 - 2014-05-12 */
 var mod;
 
 mod = angular.module('infinite-scroll', []);
@@ -24,15 +24,14 @@ mod.directive('infiniteScroll', [
         immediateCheck = true;
         handler = function() {
           var containerBottom, elementBottom, remaining, shouldScroll;
+          containerBottom = container.height() + container.scrollTop();
           if (container === $window) {
-            containerBottom = container.height() + container.scrollTop();
             elementBottom = elem.offset().top + elem.height();
           } else {
-            containerBottom = container.height();
-            elementBottom = elem.offset().top - container.offset().top + elem.height();
+            elementBottom = container[0].scrollHeight;
           }
           remaining = elementBottom - containerBottom;
-          shouldScroll = remaining <= container.height() * scrollDistance + 1;
+          shouldScroll = remaining <= scrollDistance;
           if (shouldScroll && scrollEnabled) {
             return scope.infiniteScroll();
           } else if (shouldScroll) {
