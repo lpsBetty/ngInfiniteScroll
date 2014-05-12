@@ -31,7 +31,7 @@ mod.directive('infiniteScroll', [
             elementBottom = container[0].scrollHeight;
           }
           remaining = elementBottom - containerBottom;
-          shouldScroll = remaining <= scrollDistance;
+          shouldScroll = remaining <= scrollDistance + 1;
           if (shouldScroll && scrollEnabled) {
             return scope.infiniteScroll();
           } else if (shouldScroll) {
